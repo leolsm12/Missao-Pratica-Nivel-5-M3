@@ -5,7 +5,6 @@
 package model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +40,7 @@ public class Movimentos implements Serializable {
     private Character tipo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "PrecoUnitario")
-    private BigDecimal precoUnitario;
+    private float precoUnitario;
     @JoinColumn(name = "idPessoa", referencedColumnName = "idPessoa")
     @ManyToOne
     private Pessoas idPessoa;
@@ -83,11 +82,11 @@ public class Movimentos implements Serializable {
         this.tipo = tipo;
     }
 
-    public BigDecimal getPrecoUnitario() {
+    public float getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(BigDecimal precoUnitario) {
+    public void setPrecoUnitario(float precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
 

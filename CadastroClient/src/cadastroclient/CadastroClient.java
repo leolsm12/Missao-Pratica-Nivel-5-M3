@@ -19,15 +19,17 @@ public class CadastroClient {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
      */
     public static void main(String[] args)throws IOException, ClassNotFoundException {
         try (Socket socket = new Socket("localhost", 4321);
              ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
                         
-            out.writeObject("op1"); // Substitua pelo login válido
-            out.writeObject("op1"); // Substitua pela senha válida
-            out.writeObject("L"); // Envia o comando para listar produtos
+            out.writeObject("op1"); 
+            out.writeObject("op1"); 
+            out.writeObject("L"); 
             System.out.println("Usuario conectado com sucesso");
             
             List<Produtos> produtos = (List<Produtos>) in.readObject();

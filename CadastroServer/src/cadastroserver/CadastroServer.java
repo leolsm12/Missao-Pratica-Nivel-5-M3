@@ -4,6 +4,8 @@
  */
 package cadastroserver;
 
+import controller.MovimentosJpaController;
+import controller.PessoasJpaController;
 import controller.ProdutosJpaController;
 import controller.UsuariosJpaController;
 import java.io.IOException;
@@ -23,15 +25,17 @@ public class CadastroServer {
      */
     public static void main(String[] args) throws IOException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("CadastroServerPU");
-        ProdutosJpaController ctrl = new ProdutosJpaController(emf);
+        ProdutosJpaController ctrlProd = new ProdutosJpaController(emf);
         UsuariosJpaController ctrlUsu = new UsuariosJpaController(emf);
+        MovimentosJpaController ctrlMov = new MovimentosJpaController(emf);
+        PessoasJpaController ctrlPessoa = new PessoasJpaController(emf);
 
         try (ServerSocket serverSocket = new ServerSocket(4321)) {
             System.out.println("Servidor aguardando conexoes na porta 4321...");
             
             while (true) {
                 Socket socket = serverSocket.accept();
-                CadastroThread thread = new CadastroThread(ctrl, ctrlUsu, socket);
+                CadastroThreadV2 thread = new CadastroThreadV2(ctrlUsu, ctrlMov, ctrlProd, ctrlPessoa, null, socket);
                 thread.start(); // Inicia a thread
                 System.out.println("thread iniciado!");
             }
