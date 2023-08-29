@@ -135,7 +135,6 @@ public class CadastroThreadV2 extends Thread {
         movimento.setQuantidade(quantidade);
         movimento.setPrecoUnitario( valorUnitario);
         
-        System.out.println(movimento.getIdProduto());
         ctrlMov.create(movimento);
         
         produto.setQuantidade(produto.getQuantidade() + quantidade);
